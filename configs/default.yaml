@@ -1,0 +1,54 @@
+TASK:
+  NAME: ''
+  VERSION: ''
+  DEVICES: []
+  IMG_SCALE: None
+  IMG_CHANNELS: None
+DATASETS:
+  TYPE: ''
+  TRAIN: 
+    NAME: ''
+    H_DATASETS: ('',)
+    L_DATASETS: ('',)
+    PATCH_SIZE: None 
+    BATCH_SIZE: None
+    NUM_WORKERS: None
+    SIGMA: None
+    SIGMA_RANGE: []
+  TEST: 
+    NAME: ''
+    H_DATASETS: ('',)
+    L_DATASETS: ('',)
+    SIGMA: None
+MODELG:
+  TYPE: ''
+  IN_CHANNELS: None
+  MOD_CHANNELS: []
+  OUT_CHANNELS: None
+  NUM_LAYERS: []
+  ACT_MODE: ""
+  UPSAMPLE: ""
+  DOWNSAMPLE: ""
+  PRETRAINED: ""
+LOSS:
+  TYPE: ''
+SOLVER:
+  TYPE: ''
+  NUM_EPOCHS: None
+  BASE_LR: .None
+  BETAS: []
+  WEIGHT_DECAY: .None
+  MOMENTUM: .None
+  TEST_PERIOD: None
+SCHEDULER:
+  TYPE: ''
+  MILESTONES: []
+  GAMMA: None
+RECORD:
+  OUTPUT_DIR: ''
+  TIME_STAMP: ''
+  LOG_PERIOD: None
+OPTION:
+  SEED: None
+TEST:
+  WEIGHT: ''

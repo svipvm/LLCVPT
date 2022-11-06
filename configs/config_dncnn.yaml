@@ -1,0 +1,50 @@
+TASK:
+  NAME: 'dncnn'
+  VERSION: 'plain ffdnet model test exam.'
+  DEVICES: [0, 1]
+  IMG_CHANNELS: 1
+DATASETS:
+  TYPE: 'dncnn'
+  TRAIN: 
+    NAME: 'train datasets'
+    H_DATASETS: ('/home/extend2/datasets/Train400',)
+    PATCH_SIZE: 64 
+    BATCH_SIZE: 16
+    NUM_WORKERS: 8
+    SIGMA: 20
+  VALID: 
+    NAME: 'valid datasets'
+    H_DATASETS: ('/home/vmice/project/KAIR/testsets/set12',)
+    SIGMA: 20
+  TEST: 
+    NAME: 'test datasets'
+    H_DATASETS: ('/home/vmice/project/KAIR/testsets/bsd68',)
+    SIGMA: 20
+MODELG:
+  TYPE: 'DnCNN'
+  IN_CHANNELS: 1
+  MOD_CHANNELS: [64]
+  NUM_LAYERS: [15]
+  OUT_CHANNELS: 1
+  ACT_MODE: "R"
+  PRETRAINED: "tasks/dncnn/2022Y_11M_06D_16H_58M_45S_140400/model/lastest.pt"
+LOSS:
+  TYPE: 'l1'
+SOLVER:
+  TYPE: 'adam'
+  NUM_EPOCHS: 300
+  BASE_LR: 1e-4
+  BETAS: [0.9,0.99]
+  WEIGHT_DECAY: 0.0
+  TEST_PERIOD: 200
+SCHEDULER:
+  TYPE: 'MultiStepLR'
+  MILESTONES: [90, 180, 270]
+  GAMMA: 0.5
+RECORD:
+  OUTPUT_DIR: 'tasks'
+  LOG_PERIOD: 200
+OPTION:
+  SEED: 223
+TEST:
+  WEIGHT: 'tasks/dncnn/2022Y_11M_06D_17H_06M_36S_299842/model/lastest.pt'
