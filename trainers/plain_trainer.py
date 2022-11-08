@@ -39,7 +39,7 @@ def do_train(cfg, model, train_loader, valid_loader, optimizer, scheduler, loss_
 
             # test and save model
             if trainer_step % test_period == 0:
-                torch.save(model, os.path.join(model_path, str(trainer_step) + '.pt'))
+                torch.save(model.state_dict(), os.path.join(model_path, str(trainer_step) + '.pt'))
                 logger.info('Saving the model in step {}.'.format(trainer_step))
 
                 result = do_test(cfg, model, valid_loader)
@@ -50,5 +50,5 @@ def do_train(cfg, model, train_loader, valid_loader, optimizer, scheduler, loss_
         # update leanring rate
         scheduler.step()
 
-    torch.save(model, os.path.join(model_path, 'lastest.pt'))
+    torch.save(model.state_dict(), os.path.join(model_path, 'lastest.pt'))
     logger.info('End of training.')

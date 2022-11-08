@@ -27,7 +27,7 @@ MODELG:
   NUM_LAYERS: [15]
   OUT_CHANNELS: 1
   ACT_MODE: "R"
-  PRETRAINED: "tasks/dncnn/2022Y_11M_06D_16H_58M_45S_140400/model/lastest.pt"
+  PRETRAINED: ""
 LOSS:
   TYPE: 'l1'
 SOLVER:
@@ -47,4 +47,4 @@ RECORD:
 OPTION:
   SEED: 223
 TEST:
-  WEIGHT: 'tasks/dncnn/2022Y_11M_06D_17H_06M_36S_299842/model/lastest.pt'
+  WEIGHT: ''
