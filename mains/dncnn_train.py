@@ -11,8 +11,8 @@ from utils.util_logger import setup_logger
 from models import build_model
 from data import build_data_loader
 from functions import build_function
-from solver import build_optimizer
-from solver import build_scheduler
+from solvers import build_optimizer
+from solvers import build_scheduler
 from trainers import plain_trainer
 
 

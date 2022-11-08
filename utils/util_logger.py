@@ -4,7 +4,7 @@ import logging, os, sys
 from .util_config import get_output_dir
 
 class Logger:
-    def __init__(self, cfg, is_train=True):
+    def __init__(self, cfg):
         self.logger_name = cfg.TASK.NAME
         self.logger = logging.getLogger(self.logger_name)
         self.logger.setLevel(logging.DEBUG)

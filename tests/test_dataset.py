@@ -10,7 +10,7 @@ from utils.util_file import *
 from utils.util_config import *
 from data import build_data_loader
 from models import build_model
-from solver import build_optimizer
+from solvers import build_optimizer
 from functions import build_function
 
 

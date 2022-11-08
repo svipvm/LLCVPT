@@ -4,7 +4,7 @@ import torch, os
 from utils.util_logger import get_current_logger
 from utils.util_config import empty_config_node
 from utils.util_config import get_output_dir
-from .dncnn import DnCNN
+from .network_dncnn import DnCNN
 
 def build_model(cfg, is_train=True):
     device = 'cuda' if cfg.TASK.DEVICES is not None else 'cpu'
