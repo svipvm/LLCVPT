@@ -32,7 +32,6 @@ def main():
     record_config_file(cfg)
     logger.info("Running with config:\n{}".format(cfg))
 
-
     model = build_model(cfg, False)
     test_loader = build_data_loader(cfg, 2)
 

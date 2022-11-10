@@ -7,13 +7,8 @@ from config import cfg
 from utils.util_config import *
 from utils.util_file import *
 from utils.util_option import *
+from utils.util_sys import *
 from utils.util_logger import setup_logger
-from models import build_model
-from data import build_data_loader
-from functions import build_function
-from solvers import build_optimizer
-from solvers import build_scheduler
-from trainers import plain_trainer
 
 
 def main():
@@ -37,16 +32,28 @@ def main():
     record_config_file(cfg)
     logger.info("Running with config:\n{}".format(cfg))
 
+    load_device_info(cfg)
+    
     fixed_random_seed(cfg)
 
+    from models import build_model
     model = build_model(cfg)
+
+    from data import build_data_loader
     train_loader = build_data_loader(cfg, 0)
     valid_loader = build_data_loader(cfg, 1)
+
+    from solvers import build_optimizer
     optimizer = build_optimizer(cfg, model)
+
+    from solvers import build_scheduler
     scheduler = build_scheduler(cfg, optimizer)
+
+    from functions import build_function
     loss_fn = build_function(cfg)
 
     logger.info("The description of this task is: {}".format(cfg.TASK.VERSION))
+    from trainers import plain_trainer
     plain_trainer(cfg, model, train_loader, valid_loader, optimizer, scheduler, loss_fn)
     logger.info("This result was saved to: {}".format(get_output_dir(cfg)))
 

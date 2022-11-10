@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 import torch, os
+from torch.nn.parallel import DataParallel
 from utils.util_logger import get_current_logger
 from utils.util_config import empty_config_node
 from utils.util_config import get_output_dir
@@ -27,16 +28,16 @@ def build_model(cfg, is_train=True):
 
     # pretrain field
     if is_train and not empty_config_node(cfg.MODELG.PRETRAINED):
-        model.load_state_dict(torch.load(cfg.MODELG.PRETRAINED).state_dict())
+        model.load_state_dict(torch.load(cfg.MODELG.PRETRAINED))
         logger.info('Pretrained weight: {}'.format(cfg.MODELG.PRETRAINED))
 
     elif not is_train:
         if empty_config_node(cfg.TEST.WEIGHT):
             raise Exception("Not found this weight!")
         # test for artefact
-        model.load_state_dict(torch.load(cfg.TEST.WEIGHT).cpu().state_dict())
+        model.load_state_dict(torch.load(cfg.TEST.WEIGHT))
         logger.info('Loading weight: {}'.format(cfg.TEST.WEIGHT))
 
     logger.info("Model: \n{}".format(model))
     
-    return model
+    return DataParallel(model)
