@@ -33,8 +33,12 @@ def do_train(cfg, model, train_loader, valid_loader, optimizer, scheduler, loss_
 
             # training information
             if trainer_step % log_period == 0:
+                if scheduler:
+                    current_lr = scheduler.get_lr()[0]
+                else:
+                    current_lr = optimizer.state_dict()['param_groups'][0]['lr']
                 message = 'Train <epoch: {}/{}, iter: {}, lr: {:.3e}, loss: {:.3e}>.'.format(
-                    epoch, num_epochs, trainer_step, scheduler.get_lr()[0], l.item())
+                    epoch, num_epochs, trainer_step, current_lr, l.item())
                 logger.info(message)
 
             # test and save model
@@ -48,7 +52,8 @@ def do_train(cfg, model, train_loader, valid_loader, optimizer, scheduler, loss_
                             epoch, num_epochs, trainer_step, result['avg_psnr'], result['avg_ssim']))
 
         # update leanring rate
-        scheduler.step()
+        if scheduler:
+            scheduler.step()
 
     torch.save(model.state_dict(), os.path.join(model_path, 'lastest.pt'))
     logger.info('End of training.')
