@@ -34,7 +34,7 @@ def do_train(cfg, model, train_loader, valid_loader, optimizer, scheduler, loss_
             # training information
             if trainer_step % log_period == 0:
                 if scheduler:
-                    current_lr = scheduler.get_lr()[0]
+                    current_lr = scheduler.get_last_lr()[0]
                 else:
                     current_lr = optimizer.state_dict()['param_groups'][0]['lr']
                 message = 'Train <epoch: {}/{}, iter: {}, lr: {:.3e}, loss: {:.3e}>.'.format(
@@ -55,5 +55,10 @@ def do_train(cfg, model, train_loader, valid_loader, optimizer, scheduler, loss_
         if scheduler:
             scheduler.step()
 
+    result = do_test(cfg, model, valid_loader)
+    logger.info('Test <final epoch, iter: {}> ' \
+                'result, average PSNR: {:<4.2f}dB, average SSIM: {:<4.2f}.'.format(
+                trainer_step, result['avg_psnr'], result['avg_ssim']))
     torch.save(model.state_dict(), os.path.join(model_path, 'lastest.pt'))
+
     logger.info('End of training.')

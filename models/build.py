@@ -9,9 +9,9 @@ from .network_dncnn import DnCNN
 
 def build_model(cfg, is_train=True):
     device = 'cuda' if cfg.TASK.DEVICES is not None else 'cpu'
-    model_name = cfg.MODELG.TYPE.lower()
+    model_type = cfg.MODELG.TYPE.lower()
     
-    if model_name == 'dncnn':
+    if model_type == 'dncnn':
         model = DnCNN(
             in_channels=cfg.MODELG.IN_CHANNELS,
             mod_channels=cfg.MODELG.MOD_CHANNELS,
@@ -30,11 +30,10 @@ def build_model(cfg, is_train=True):
     if is_train and not empty_config_node(cfg.MODELG.PRETRAINED):
         model.load_state_dict(torch.load(cfg.MODELG.PRETRAINED))
         logger.info('Pretrained weight: {}'.format(cfg.MODELG.PRETRAINED))
-
+    # test for artefact
     elif not is_train:
         if empty_config_node(cfg.TEST.WEIGHT):
             raise Exception("Not found this weight!")
-        # test for artefact
         model.load_state_dict(torch.load(cfg.TEST.WEIGHT))
         logger.info('Loading weight: {}'.format(cfg.TEST.WEIGHT))
 

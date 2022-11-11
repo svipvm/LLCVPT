@@ -59,4 +59,6 @@ def __get_collate(cfg):
     if dataset_type in plain_dataset_list:
         return plain_collate_fn
 
-    raise Exception("Not found this collate function!")
+    else:
+        return None
+        # raise Exception("Not found this collate function!")
