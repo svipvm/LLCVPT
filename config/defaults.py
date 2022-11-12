@@ -70,7 +70,6 @@ _C.SOLVER.BASE_LR = None                # the learing rate in the solver (necess
 _C.SOLVER.BETAS = []                    # the betas in the solver about Adam
 _C.SOLVER.WEIGHT_DECAY = None           # the weight decay in the solver (necessary)
 _C.SOLVER.MOMENTUM = None               # the betas in the solver about SGD
-_C.SOLVER.TEST_PERIOD = None            # iteration number per test during train (necessary)
 
 # ------------------------------------------------------------------------------------------ #
 # Scheduler
@@ -87,6 +86,8 @@ _C.RECORD = CN()
 _C.RECORD.OUTPUT_DIR = ""               # the root directory of output task results
 _C.RECORD.TIME_STAMP = ""               # automatically generated task timestamp
 _C.RECORD.LOG_PERIOD = None             # iteration number per log during train (necessary)
+_C.RECORD.TEST_PERIOD = None            # iteration number per test during train (necessary)
+_C.RECORD.SAVE_PERIOD = None            # iteration number per save model during train (necessary)
 
 # ------------------------------------------------------------------------------------------ #
 # Option

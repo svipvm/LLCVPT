@@ -39,7 +39,6 @@ SOLVER:
   BETAS: []
   WEIGHT_DECAY: .None
   MOMENTUM: .None
-  TEST_PERIOD: None
 SCHEDULER:
   TYPE: ''
   MILESTONES: []
@@ -48,6 +47,8 @@ RECORD:
   OUTPUT_DIR: ''
   TIME_STAMP: ''
   LOG_PERIOD: None
+  TEST_PERIOD: None
+  SAVE_PERIOD: None
 OPTION:
   SEED: None
 TEST:

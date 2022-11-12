@@ -28,15 +28,30 @@ def build_model(cfg, is_train=True):
 
     # pretrain field
     if is_train and not empty_config_node(cfg.MODELG.PRETRAINED):
-        model.load_state_dict(torch.load(cfg.MODELG.PRETRAINED))
+        load_model(cfg.MODELG.PRETRAINED, model)
         logger.info('Pretrained weight: {}'.format(cfg.MODELG.PRETRAINED))
     # test for artefact
     elif not is_train:
         if empty_config_node(cfg.TEST.WEIGHT):
             raise Exception("Not found this weight!")
-        model.load_state_dict(torch.load(cfg.TEST.WEIGHT))
+        load_model(cfg.TEST.WEIGHT, model)
         logger.info('Loading weight: {}'.format(cfg.TEST.WEIGHT))
 
     logger.info("Model: \n{}".format(model))
     
     return DataParallel(model)
+
+def save_model(model, path):
+    if isinstance(model, DataParallel):
+        model = model.module
+    state_dict = model.state_dict()
+    for key, param in state_dict.items():
+        state_dict[key] = param.cpu()
+    torch.save(state_dict, path)
+
+def load_model(path, model, strict=True):
+    if isinstance(model, DataParallel):
+        model = model.module
+    state_dict = torch.load(path)
+    model.load_state_dict(state_dict, strict=strict)
+    
