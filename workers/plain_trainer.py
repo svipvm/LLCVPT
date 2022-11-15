@@ -6,6 +6,7 @@ from utils.util_file import mkdir_if_not_exist
 from utils.util_config import empty_config_node
 from utils.util_img import *
 from models import save_model
+from data.data_parser import do_parser
 from .plain_tester import do_test
 import torch
 
@@ -21,13 +22,13 @@ def do_train(cfg, model, train_loader, valid_loader, optimizer, scheduler, loss_
 
     logger.info('Begin of training.')
     for epoch in range(num_epochs):
-        for (y, x, _, _) in train_loader:
+        for batch_data in train_loader:
             trainer_step += 1
             # (y, x): y = T(x) + noise
-            y, x = y.to(device), x.to(device)
+            y, x, hyper, _ = do_parser(cfg, batch_data)
 
             optimizer.zero_grad()
-            e = model(y)
+            e = model(y) if not hyper else model(y, *hyper)
             l = loss_fn(e, x)
             l.backward()
             optimizer.step()

@@ -5,6 +5,7 @@ from utils.util_config import get_output_dir
 from utils.util_config import empty_config_node
 from utils.util_file import mkdir_if_not_exist
 from utils.util_img import *
+from data.data_parser import do_parser
 import torch
 
 def do_test(cfg, model, data_loader):
@@ -18,13 +19,13 @@ def do_test(cfg, model, data_loader):
 
     result_path = mkdir_if_not_exist([get_output_dir(cfg), 'result'])
 
-    for idx, (y, x, y_path, _) in enumerate(data_loader):
-        image_name, ext = os.path.splitext(os.path.basename(y_path[0]))
-        y, x = y.to(device), x.to(device)
+    for idx, batch_data in enumerate(data_loader):
+        y, x, hyper, paths = do_parser(cfg, batch_data)
+        image_name, ext = os.path.splitext(os.path.basename(paths[0][0]))
         
         model.eval()
         with torch.no_grad():
-            e = model(y)
+            e = model(y) if not hyper else model(y, *hyper)
         model.train()
 
         img_e = tensor2uint(e.detach().float().cpu())

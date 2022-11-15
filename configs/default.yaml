@@ -6,6 +6,7 @@ TASK:
   IMG_CHANNELS: None
 DATASETS:
   TYPE: ''
+  PARSER: ''
   TRAIN: 
     NAME: ''
     H_DATASETS: ('',)

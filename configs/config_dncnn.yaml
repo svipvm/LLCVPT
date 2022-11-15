@@ -1,20 +1,21 @@
 TASK:
   NAME: 'dncnn'
   VERSION: 'plain ffdnet model test exam.'
-  DEVICES: [0, 1]
+  DEVICES: []
   IMG_CHANNELS: 1
 DATASETS:
   TYPE: 'dncnn'
+  PARSER: 'pair'
   TRAIN: 
     NAME: 'train datasets'
-    H_DATASETS: ('/home/extend2/datasets/Train400',)
+    H_DATASETS: ('D:\Code\DnCNN\TrainingCodes\DnCNN_TrainingCodes_v1.0\data\Train400',)
     PATCH_SIZE: 64 
     BATCH_SIZE: 16
     NUM_WORKERS: 8
     SIGMA: 20
   VALID: 
     NAME: 'valid datasets'
-    H_DATASETS: ('/home/vmice/project/KAIR/testsets/set12',)
+    H_DATASETS: ('D:\Code\DnCNN\TrainingCodes\DnCNN_TrainingCodes_v1.0\data\Test\Set12',)
     SIGMA: 20
   TEST: 
     NAME: 'test datasets'

@@ -20,6 +20,7 @@ _C.TASK.IMG_CHANNELS = None             # the channel number of this task (gray:
 # ------------------------------------------------------------------------------------------ #
 _C.DATASETS = CN()
 _C.DATASETS.TYPE = ""                   # the type of dataset (relate to a dataset class)
+_C.DATASETS.PARSER = ""                 # specify batch data resolution type
 _C.DATASETS.TRAIN = CN()
 _C.DATASETS.TRAIN.NAME = ""             # just a name about the train dataset
 _C.DATASETS.TRAIN.H_DATASETS = ()       # the paths about hihg quality image
