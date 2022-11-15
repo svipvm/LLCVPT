@@ -3,13 +3,14 @@
 from utils.util_logger import get_current_logger
 from utils.util_config import get_output_dir
 from utils.util_file import mkdir_if_not_exist
+from utils.util_config import empty_config_node
 from utils.util_img import *
 from models import save_model
-from testers import plain_tester as do_test
+from .plain_tester import do_test
 import torch
 
 def do_train(cfg, model, train_loader, valid_loader, optimizer, scheduler, loss_fn):
-    device = 'cuda' if cfg.TASK.DEVICES is not None else 'cpu'
+    device = 'cpu' if empty_config_node(cfg.TASK.DEVICES) else 'gpu'
     model_path = mkdir_if_not_exist([get_output_dir(cfg), 'model'])
     logger = get_current_logger(cfg)
     num_epochs = cfg.SOLVER.NUM_EPOCHS

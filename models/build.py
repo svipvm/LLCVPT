@@ -8,7 +8,7 @@ from utils.util_config import get_output_dir
 from .network_dncnn import DnCNN
 
 def build_model(cfg, is_train=True):
-    device = 'cuda' if cfg.TASK.DEVICES is not None else 'cpu'
+    device = 'cpu' if empty_config_node(cfg.TASK.DEVICES) else 'gpu'
     model_type = cfg.MODELG.TYPE.lower()
     
     if model_type == 'dncnn':
@@ -18,7 +18,7 @@ def build_model(cfg, is_train=True):
             out_channels=cfg.MODELG.OUT_CHANNELS,
             num_layers=cfg.MODELG.NUM_LAYERS,
             act_mode=cfg.MODELG.ACT_MODE
-        ).to(device)
+        )
     # add model
 
     else:
@@ -38,8 +38,9 @@ def build_model(cfg, is_train=True):
         logger.info('Loading weight: {}'.format(cfg.TEST.WEIGHT))
 
     logger.info("Model: \n{}".format(model))
-    
-    return DataParallel(model)
+
+    print(empty_config_node(cfg.TASK.DEVICES))
+    return DataParallel(model).to(device)
 
 def save_model(model, path):
     if isinstance(model, DataParallel):

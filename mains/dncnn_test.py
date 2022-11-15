@@ -8,7 +8,7 @@ from utils.util_logger import *
 from utils.util_config import *
 from models import build_model
 from data import build_data_loader
-from testers import plain_tester
+from workers.plain_tester import do_test
 
 
 def main():
@@ -36,7 +36,7 @@ def main():
     test_loader = build_data_loader(cfg, 2)
 
     logger.info("The description of this task is: {}".format(cfg.TASK.VERSION))
-    plain_tester(cfg, model, test_loader)
+    do_test(cfg, model, test_loader)
     logger.info("This result was saved to: {}".format(get_output_dir(cfg)))
 
 if __name__ == "__main__":

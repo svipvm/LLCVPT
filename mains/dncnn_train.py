@@ -10,7 +10,6 @@ from utils.util_option import *
 from utils.util_sys import *
 from utils.util_logger import setup_logger
 
-
 def main():
     parser = argparse.ArgumentParser(description="DnCNN Train Project")
     parser.add_argument("--config", 
@@ -53,8 +52,8 @@ def main():
     loss_fn = build_function(cfg)
 
     logger.info("The description of this task is: {}".format(cfg.TASK.VERSION))
-    from trainers import plain_trainer
-    plain_trainer(cfg, model, train_loader, valid_loader, optimizer, scheduler, loss_fn)
+    from workers.plain_trainer import do_train
+    do_train(cfg, model, train_loader, valid_loader, optimizer, scheduler, loss_fn)
     logger.info("This result was saved to: {}".format(get_output_dir(cfg)))
 
 if __name__ == "__main__":

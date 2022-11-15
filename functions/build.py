@@ -3,9 +3,10 @@
 import torch
 from torch import nn
 from utils.util_logger import get_current_logger
+from utils.util_config import empty_config_node
 
 def build_function(cfg):
-    device = 'cuda' if cfg.TASK.DEVICES is not None else 'cpu'
+    device = 'cpu' if empty_config_node(cfg.TASK.DEVICES) else 'gpu'
     loss_type = cfg.LOSS.TYPE.lower()
 
     if loss_type == "l1":

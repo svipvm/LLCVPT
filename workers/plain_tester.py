@@ -2,6 +2,7 @@
 
 from utils.util_logger import get_current_logger
 from utils.util_config import get_output_dir
+from utils.util_config import empty_config_node
 from utils.util_file import mkdir_if_not_exist
 from utils.util_img import *
 import torch
@@ -12,7 +13,7 @@ def do_test(cfg, model, data_loader):
         'avg_ssim': .0
     }
     logger = get_current_logger(cfg)
-    device = 'cuda' if cfg.TASK.DEVICES is not None else 'cpu'
+    device = 'cpu' if empty_config_node(cfg.TASK.DEVICES) else 'gpu'
     count = len(data_loader)
 
     result_path = mkdir_if_not_exist([get_output_dir(cfg), 'result'])
