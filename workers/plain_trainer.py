@@ -11,7 +11,7 @@ from .plain_tester import do_test
 import torch
 
 def do_train(cfg, model, train_loader, valid_loader, optimizer, scheduler, loss_fn):
-    device = 'cpu' if empty_config_node(cfg.TASK.DEVICES) else 'gpu'
+    device = 'cpu' if empty_config_node(cfg.TASK.DEVICES) else 'cuda'
     model_path = mkdir_if_not_exist([get_output_dir(cfg), 'model'])
     logger = get_current_logger(cfg)
     num_epochs = cfg.SOLVER.NUM_EPOCHS

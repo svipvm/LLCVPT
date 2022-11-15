@@ -14,7 +14,7 @@ def do_test(cfg, model, data_loader):
         'avg_ssim': .0
     }
     logger = get_current_logger(cfg)
-    device = 'cpu' if empty_config_node(cfg.TASK.DEVICES) else 'gpu'
+    device = 'cpu' if empty_config_node(cfg.TASK.DEVICES) else 'cuda'
     count = len(data_loader)
 
     result_path = mkdir_if_not_exist([get_output_dir(cfg), 'result'])

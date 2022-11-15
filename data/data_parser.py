@@ -3,7 +3,7 @@
 from utils.util_config import empty_config_node
 
 def do_parser(cfg, batch_data):
-    device = 'cpu' if empty_config_node(cfg.TASK.DEVICES) else 'gpu'
+    device = 'cpu' if empty_config_node(cfg.TASK.DEVICES) else 'cuda'
     parser_type = cfg.DATASETS.PARSER.lower()
 
     if parser_type == 'pair':

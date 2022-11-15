@@ -27,10 +27,14 @@ MODELG:
   MOD_CHANNELS: []
   OUT_CHANNELS: None
   NUM_LAYERS: []
+  BIAS: None
   ACT_MODE: ""
   UPSAMPLE: ""
   DOWNSAMPLE: ""
   PRETRAINED: ""
+  INIT_TYPE: ""
+  INIT_BN_TYPE: ""
+  INIT_GAIN: None
 LOSS:
   TYPE: ''
 SOLVER:

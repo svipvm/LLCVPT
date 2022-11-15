@@ -4,9 +4,8 @@ from torch import nn
 from .layers import basicblock as B
 
 class DnCNN(nn.Module):
-    def __init__(self, in_channels, mod_channels, out_channels, num_layers, act_mode):
+    def __init__(self, in_channels, mod_channels, out_channels, num_layers, act_mode, bias):
         super(DnCNN, self).__init__()
-        bias = True
 
         mod_channel, num_layer = mod_channels[0], num_layers[0]
 

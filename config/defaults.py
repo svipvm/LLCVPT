@@ -50,10 +50,14 @@ _C.MODELG.IN_CHANNELS = None            # number of channels entering the model
 _C.MODELG.MOD_CHANNELS = []             # number of channels related to number of layers
 _C.MODELG.NUM_LAYERS = []               # number of layers related to channels
 _C.MODELG.OUT_CHANNELS = None           # number of channers out the model
+_C.MODELG.BIAS = None                   # whether the convolution layer uses bias
 _C.MODELG.ACT_MODE = ""                 # the types of activation functions
 _C.MODELG.UPSAMPLE_MODE = ""            # the type of upsample in the model
 _C.MODELG.DOWNSAMPLE_MODE = ""          # the type of downsample in the model
 _C.MODELG.PRETRAINED = ""               # A path of pretrained weight
+_C.MODELG.INIT_TYPE = ""                # The (conv)linear layer uses the initialization method
+_C.MODELG.INIT_BN_TYPE = ""             # The batch normaliation layer uses the initialization method
+_C.MODELG.INIT_GAIN = None              # optional scaling factor in initialize function
 
 # ------------------------------------------------------------------------------------------ #
 # Loss function

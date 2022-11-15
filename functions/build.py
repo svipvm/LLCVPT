@@ -6,7 +6,7 @@ from utils.util_logger import get_current_logger
 from utils.util_config import empty_config_node
 
 def build_function(cfg):
-    device = 'cpu' if empty_config_node(cfg.TASK.DEVICES) else 'gpu'
+    device = 'cpu' if empty_config_node(cfg.TASK.DEVICES) else 'cuda'
     loss_type = cfg.LOSS.TYPE.lower()
 
     if loss_type == "l1":
